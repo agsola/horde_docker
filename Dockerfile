@@ -1,5 +1,10 @@
 FROM php:5.6-apache
 
+MAINTAINER agsola
+ENV HORDE_VERSION 5.2.11
+#ENV http_proxy http://x.x.x.x:8080 <-- if you need a proxy
+
+
 RUN apt-get update && apt-get install -y \
         libfreetype6-dev \
         libicu-dev \
@@ -49,6 +54,7 @@ RUN docker-php-ext-configure gd --with-png-dir=/usr --with-freetype-dir=/usr --w
 VOLUME /var/www/html
 
 RUN pear upgrade PEAR \
+#    && pear config-set http_proxy http://x.x.x.x:8080 \ <-- If you need a proxy
  && pear upgrade channel://pear.php.net/XML_Serializer-0.20.2 \
  && pear upgrade channel://pear.php.net/Date_Holidays-0.21.8 \
  && pear upgrade channel://pear.php.net/Text_LanguageDetect-0.3.0 \
@@ -64,7 +70,7 @@ RUN pear upgrade PEAR \
     && pear install horde/horde_role \
     && pear config-set horde_dir /usr/src/horde \
 #    && pear run-scripts horde/horde_role \
-    && pear install -a -B horde/webmail-5.2.11
+    && pear install -a -B horde/webmail-$HORDE_VERSION
 
 COPY docker-entrypoint.sh /entrypoint.sh
 
