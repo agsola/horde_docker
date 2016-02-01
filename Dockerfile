@@ -64,7 +64,7 @@ RUN pear upgrade PEAR \
     && pear install horde/horde_role \
     && pear config-set horde_dir /usr/src/horde \
 #    && pear run-scripts horde/horde_role \
-    && pear install -a -B horde/webmail-5.2.9
+    && pear install -a -B horde/webmail-5.2.11
 
 COPY docker-entrypoint.sh /entrypoint.sh
 
