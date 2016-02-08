@@ -1,7 +1,7 @@
 FROM php:5.6-apache
 
 MAINTAINER agsola
-ENV HORDE_VERSION 5.2.11
+ENV HORDE_VERSION 5.2.7
 #ENV http_proxy http://x.x.x.x:8080 <-- if you need a proxy
 
 
