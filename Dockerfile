@@ -70,9 +70,12 @@ RUN pear upgrade PEAR \
     && pear install horde/horde_role \
     && pear config-set horde_dir /usr/src/horde \
 #    && pear run-scripts horde/horde_role \
-    && pear install -a -B horde/webmail-$HORDE_VERSION
+    && pear install -a -B horde/webmail-$HORDE_VERSION \
+    && echo 'extension=memcache.so' > /usr/local/etc/php/conf.d/docker-php-ext-memcache.ini
 
 COPY docker-entrypoint.sh /entrypoint.sh
+
+EXPOSE 80 443
 
 ENTRYPOINT ["/entrypoint.sh"]
 CMD ["apache2-foreground"]
